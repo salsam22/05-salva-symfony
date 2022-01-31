@@ -12,10 +12,13 @@ class HomeController extends AbstractController
     /**
      * @Route("/", name="home")
      */
-    public function home(): Response
+    public function home(ShirtRepository $shirtRepository): Response
     {
+
+        $shirts = $shirtRepository->findAll();
+
         return $this->render('home.html.twig', [
-            'controller_name' => 'HomeController',
+            "shirts"=>$shirts
         ]);
     }
 }

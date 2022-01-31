@@ -1,0 +1,9 @@
+<div class="card" style="width: 18rem;">
+    <img src="{{ asset("images/" ~ shirt.image) }}" class="card-img-top" alt="{{ shirt.title }}">
+    <div class="card-body">
+        <h5 class="card-title">{{ shirt.title }}</h5>
+        <p class="card-text">{{ shirt.description }}</p>
+        <p class="card-text"> {{ shirt.uploaddate | date("d-m-Y")}} </p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+    </div>
+</div>

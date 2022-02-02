@@ -17,6 +17,35 @@
         {% endblock %}
     </head>
     <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-secondary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#" style="width: 75px">
+                <img style="width: 75px" src="/default/logo.png">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarScroll">
+                <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="#">New Shirt</a>
+                    </li>
+                </ul>
+                <div class="d-flex justify-content-end">
+                    <a class="nav-link text-decoration-none text-dark" href="#"><i class="bi bi-person-circle"></i></a>
+                    <a class="nav-link text-decoration-none text-dark" href="#"><i class="bi bi-basket2"></i></a>
+                </div>
+                <!--<form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>-->
+            </div>
+
+        </div>
+    </nav>
         {% block body %}{% endblock %}
     </body>
 </html>

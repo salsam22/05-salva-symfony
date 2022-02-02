@@ -4,6 +4,6 @@
         <h5 class="card-title">{{ shirt.title }}</h5>
         <p class="card-text">{{ shirt.description }}</p>
         <p class="card-text"> {{ shirt.uploaddate | date("d-m-Y")}} </p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+        <a href="{{path('shirt_show', {id: shirt.id})}}" class="btn btn-primary">Go shirt</a>
     </div>
 </div>

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\ShirtRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -21,7 +22,11 @@ class ShirtController extends AbstractController
     /**
      * @Route ("/shirt/{id}", name="shirt_show")
      */
-    public function show($id) {
-        return new Response("Shirt data with id: $id");
+    public function show($id, ShirtRepository $shirtRepository) {
+
+        $shirt = $shirtRepository->find($id);
+        return $this->render('shirt/shirt.html.twig', [
+            'shirt' => $shirt,
+        ]);
     }
 }

@@ -1,20 +1,49 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ShirtController!{% endblock %}
+{% block title %}{{ shirt.title }}{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <style>
+        .card-show {
+            justify-content: center;
+            display: flex;
+        }
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+        .photo-show {
+            width: 750px;
+        }
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/opt/lampp/htdocs/05-salva-symfony/src/Controller/ShirtController.php'|file_link(0) }}">src/Controller/ShirtController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/opt/lampp/htdocs/05-salva-symfony/templates/shirt/shirt.html.twig'|file_link(0) }}">templates/shirt/index.html.twig</a></code></li>
-    </ul>
-</div>
+
+    </style>
+
+    {#  <div class="example-wrapper">
+    <h1>{{ shirt.title }}</h1>
+
+    <img src="{{ asset("images/" ~ shirt.image) }}" alt="{{ shirt.title }}">
+
+    <p>{{ shirt.description }}</p>
+
+    <p>Data de pujada: {{ shirt.uploaddate | date("d-m-Y")}}</p>
+</div> #}
+    <div class="container-fluid mt-5">
+        <div class="row">
+            <div class="col-12 card-show">
+                <div class="card mb-3" style="max-width: 1024px;">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="{{ asset("images/" ~ shirt.image) }}" class="img-fluid photo-show" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ shirt.title }}</h5>
+                                <p class="card-text">{{ shirt.description }}</p>
+                                <p class="card-text"><small
+                                            class="text-muted">{{ shirt.uploaddate | date("d-m-Y") }}</small></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

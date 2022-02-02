@@ -43,6 +43,12 @@ class Shirt
      */
     private $category;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Users::class, inversedBy="shirts")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -104,6 +110,18 @@ class Shirt
     public function setCategory(?Category $category): self
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    public function getUser(): ?Users
+    {
+        return $this->user;
+    }
+
+    public function setUser(?Users $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

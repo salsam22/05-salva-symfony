@@ -16,15 +16,6 @@
 
     </style>
 
-    {#  <div class="example-wrapper">
-    <h1>{{ shirt.title }}</h1>
-
-    <img src="{{ asset("images/" ~ shirt.image) }}" alt="{{ shirt.title }}">
-
-    <p>{{ shirt.description }}</p>
-
-    <p>Data de pujada: {{ shirt.uploaddate | date("d-m-Y")}}</p>
-</div> #}
     <div class="container-fluid mt-5">
         <div class="row">
             <div class="col-12 card-show">
@@ -39,6 +30,7 @@
                                 <p class="card-text">{{ shirt.description }}</p>
                                 <p class="card-text"><small
                                             class="text-muted">{{ shirt.uploaddate | date("d-m-Y") }}</small></p>
+                                {{ include('shirt/_delete_form.html.twig') }}
                             </div>
                         </div>
                     </div>

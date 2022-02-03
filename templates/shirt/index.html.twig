@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Shirt index{% endblock %}
+
+{% block body %}
+    <h1>Shirt index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Image</th>
+                <th>Upload_date</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for shirt in shirts %}
+            <tr>
+                <td>{{ shirt.id }}</td>
+                <td>{{ shirt.title }}</td>
+                <td>{{ shirt.description }}</td>
+                <td>{{ shirt.image }}</td>
+                <td>{{ shirt.uploadDate ? shirt.uploadDate|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('shirt_show', {'id': shirt.id}) }}">show</a>
+                    <a href="{{ path('shirt_edit', {'id': shirt.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('shirt_new') }}">Create new</a>
+{% endblock %}

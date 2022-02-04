@@ -4,8 +4,8 @@ namespace App\Form;
 
 use App\Entity\Shirt;
 use App\Entity\Category;
-use App\Entity\Users;
-use App\Repository\UsersRepository;
+use App\Entity\User;
+use App\Repository\UserRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
@@ -26,7 +26,7 @@ class ShirtType extends AbstractType
                 'choice_label' => 'name'
             ])
             ->add('user',EntityType::class, [
-                'class' => Users::class,
+                'class' => User::class,
                 'choice_label' => 'username'
             ])
         ;

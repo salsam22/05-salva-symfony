@@ -25,7 +25,7 @@ class Rol
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity=Users::class, mappedBy="rol")
+     * @ORM\OneToMany(targetEntity=User::class, mappedBy="rol")
      */
     private $users;
 
@@ -52,14 +52,14 @@ class Rol
     }
 
     /**
-     * @return Collection|Users[]
+     * @return Collection|User[]
      */
     public function getUsers(): Collection
     {
         return $this->users;
     }
 
-    public function addUser(Users $user): self
+    public function addUser(User $user): self
     {
         if (!$this->users->contains($user)) {
             $this->users[] = $user;
@@ -69,7 +69,7 @@ class Rol
         return $this;
     }
 
-    public function removeUser(Users $user): self
+    public function removeUser(User $user): self
     {
         if ($this->users->removeElement($user)) {
             // set the owning side to null (unless already changed)

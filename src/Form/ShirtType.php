@@ -4,6 +4,8 @@ namespace App\Form;
 
 use App\Entity\Shirt;
 use App\Entity\Category;
+use App\Entity\Users;
+use App\Repository\UsersRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
@@ -21,11 +23,12 @@ class ShirtType extends AbstractType
             ->add('upload_date')
             ->add('category',EntityType::class, [
                 'class' => Category::class,
+                'choice_label' => 'name'
             ])
-            ->add('user', HiddenType::class, [
-                'data' => '1',
+            ->add('user',EntityType::class, [
+                'class' => Users::class,
+                'choice_label' => 'email'
             ])
-
         ;
     }
 

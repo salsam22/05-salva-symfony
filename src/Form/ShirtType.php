@@ -27,7 +27,7 @@ class ShirtType extends AbstractType
             ])
             ->add('user',EntityType::class, [
                 'class' => Users::class,
-                'choice_label' => 'email'
+                'choice_label' => 'username'
             ])
         ;
     }

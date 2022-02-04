@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Temps de generació: 02-02-2022 a les 13:43:10
+-- Temps de generació: 04-02-2022 a les 12:14:57
 -- Versió del servidor: 10.4.21-MariaDB
 -- Versió de PHP: 7.4.23
 
@@ -59,11 +59,11 @@ CREATE TABLE `doctrine_migration_versions` (
 --
 
 INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_time`) VALUES
-('DoctrineMigrations\\Version20220128111456', '2022-02-02 10:42:18', 231),
-('DoctrineMigrations\\Version20220131104400', '2022-02-02 10:42:18', 216),
-('DoctrineMigrations\\Version20220131105516', '2022-02-02 10:42:18', 1832),
-('DoctrineMigrations\\Version20220202093807', '2022-02-02 10:42:20', 2097),
-('DoctrineMigrations\\Version20220202094155', '2022-02-02 10:42:22', 1280);
+('DoctrineMigrations\\Version20220128111456', '2022-02-04 12:09:56', 239),
+('DoctrineMigrations\\Version20220131104400', '2022-02-04 12:09:57', 541),
+('DoctrineMigrations\\Version20220131105516', '2022-02-04 12:09:57', 1623),
+('DoctrineMigrations\\Version20220202093807', '2022-02-04 12:09:59', 1515),
+('DoctrineMigrations\\Version20220202094155', '2022-02-04 12:10:00', 1028);
 
 -- --------------------------------------------------------
 
@@ -108,7 +108,8 @@ CREATE TABLE `shirt` (
 INSERT INTO `shirt` (`id`, `title`, `description`, `image`, `upload_date`, `category_id`, `user_id`) VALUES
 (1, 'Black is the Future', 'Camiseta Black is the Future', 'camiseta-black-is-the-future-unisex.jpg', '2022-01-25', 1, 1),
 (2, 'Juego del calamar', 'Camiseta del Juego del Calamar.', 'juego-del-calamar.jpg', '2022-01-31', 1, 1),
-(3, 'Dragon Oriental', 'Camiseta con un dragon oriental.', 'dragon-oriental-unisex.jpg', '2022-01-28', 1, 1);
+(3, 'Dragon Oriental', 'Camiseta con un dragon oriental.', 'dragon-oriental-unisex.jpg', '2022-01-28', 1, 1),
+(6, 'gkaghfg', 'afafagasfasfas', 'juego-del-calamar.jpg', '2022-04-05', 4, 1);
 
 -- --------------------------------------------------------
 
@@ -118,7 +119,7 @@ INSERT INTO `shirt` (`id`, `title`, `description`, `image`, `upload_date`, `cate
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
-  `email` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `username` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `avatar` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `rol_id` int(11) NOT NULL
@@ -128,9 +129,9 @@ CREATE TABLE `users` (
 -- Bolcament de dades per a la taula `users`
 --
 
-INSERT INTO `users` (`id`, `email`, `password`, `avatar`, `rol_id`) VALUES
-(1, 'admin@admin.com', '1234', NULL, 1),
-(2, 'user@user.com', '1234', NULL, 3);
+INSERT INTO `users` (`id`, `username`, `password`, `avatar`, `rol_id`) VALUES
+(1, 'admin', '1234', NULL, 1),
+(2, 'user', '1234', NULL, 3);
 
 --
 -- Índexs per a les taules bolcades
@@ -189,7 +190,7 @@ ALTER TABLE `rol`
 -- AUTO_INCREMENT per la taula `shirt`
 --
 ALTER TABLE `shirt`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT per la taula `users`

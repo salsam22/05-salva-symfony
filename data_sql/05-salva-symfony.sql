@@ -2,10 +2,10 @@
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: localhost
--- Temps de generació: 04-02-2022 a les 12:14:57
--- Versió del servidor: 10.4.21-MariaDB
--- Versió de PHP: 7.4.23
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 05-02-2022 a las 20:52:55
+-- Versión del servidor: 10.4.21-MariaDB
+-- Versión de PHP: 8.0.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de dades: `05-salva-symfony`
+-- Base de datos: `05-salva-symfony`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de la taula `category`
+-- Estructura de tabla para la tabla `category`
 --
 
 CREATE TABLE `category` (
@@ -33,7 +33,7 @@ CREATE TABLE `category` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Bolcament de dades per a la taula `category`
+-- Volcado de datos para la tabla `category`
 --
 
 INSERT INTO `category` (`id`, `name`) VALUES
@@ -45,7 +45,7 @@ INSERT INTO `category` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de la taula `doctrine_migration_versions`
+-- Estructura de tabla para la tabla `doctrine_migration_versions`
 --
 
 CREATE TABLE `doctrine_migration_versions` (
@@ -55,20 +55,20 @@ CREATE TABLE `doctrine_migration_versions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Bolcament de dades per a la taula `doctrine_migration_versions`
+-- Volcado de datos para la tabla `doctrine_migration_versions`
 --
 
 INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_time`) VALUES
-('DoctrineMigrations\\Version20220128111456', '2022-02-04 12:09:56', 239),
-('DoctrineMigrations\\Version20220131104400', '2022-02-04 12:09:57', 541),
-('DoctrineMigrations\\Version20220131105516', '2022-02-04 12:09:57', 1623),
-('DoctrineMigrations\\Version20220202093807', '2022-02-04 12:09:59', 1515),
-('DoctrineMigrations\\Version20220202094155', '2022-02-04 12:10:00', 1028);
+('DoctrineMigrations\\Version20220128111456', '2022-02-05 12:10:21', 166),
+('DoctrineMigrations\\Version20220131104400', '2022-02-05 12:10:21', 489),
+('DoctrineMigrations\\Version20220131105516', '2022-02-05 12:10:22', 1377),
+('DoctrineMigrations\\Version20220202093807', '2022-02-05 12:10:23', 2095),
+('DoctrineMigrations\\Version20220202094155', '2022-02-05 12:10:25', 2011);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de la taula `rol`
+-- Estructura de tabla para la tabla `rol`
 --
 
 CREATE TABLE `rol` (
@@ -77,18 +77,18 @@ CREATE TABLE `rol` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Bolcament de dades per a la taula `rol`
+-- Volcado de datos para la tabla `rol`
 --
 
 INSERT INTO `rol` (`id`, `name`) VALUES
-(1, 'ADMIN'),
-(2, 'USER_CREATOR'),
-(3, 'USER');
+(1, 'ROLE_ADMIN'),
+(2, 'ROLE_CREATOR'),
+(3, 'ROLE_USER');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de la taula `shirt`
+-- Estructura de tabla para la tabla `shirt`
 --
 
 CREATE TABLE `shirt` (
@@ -102,7 +102,7 @@ CREATE TABLE `shirt` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Bolcament de dades per a la taula `shirt`
+-- Volcado de datos para la tabla `shirt`
 --
 
 INSERT INTO `shirt` (`id`, `title`, `description`, `image`, `upload_date`, `category_id`, `user_id`) VALUES
@@ -114,49 +114,51 @@ INSERT INTO `shirt` (`id`, `title`, `description`, `image`, `upload_date`, `cate
 -- --------------------------------------------------------
 
 --
--- Estructura de la taula `users`
+-- Estructura de tabla para la tabla `user`
 --
 
-CREATE TABLE `users` (
+CREATE TABLE `user` (
   `id` int(11) NOT NULL,
+  `name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `username` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `password` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `avatar` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `rol_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Bolcament de dades per a la taula `users`
+-- Volcado de datos para la tabla `user`
 --
 
-INSERT INTO `users` (`id`, `username`, `password`, `avatar`, `rol_id`) VALUES
-(1, 'admin', '1234', NULL, 1),
-(2, 'user', '1234', NULL, 3);
+INSERT INTO `user` (`id`, `name`, `username`, `password`, `email`, `avatar`, `rol_id`) VALUES
+(1, 'ADMIN', 'ADMIN', 'gUuFwNo4zkMV+erdGtBlf5NunNgcELQuiCFJmCU4F+E=', 'admin@admin.com', NULL, 1),
+(7, 'Salva', 'Salva', '$2y$13$7/MhqHUAXfEOM7XqQZiclORzC4c/Sq6UxycXxMbzifVHEUNtP1mK.', 'salva@gmail.com', NULL, 1);
 
 --
--- Índexs per a les taules bolcades
+-- Índices para tablas volcadas
 --
 
 --
--- Índexs per a la taula `category`
+-- Indices de la tabla `category`
 --
 ALTER TABLE `category`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índexs per a la taula `doctrine_migration_versions`
+-- Indices de la tabla `doctrine_migration_versions`
 --
 ALTER TABLE `doctrine_migration_versions`
   ADD PRIMARY KEY (`version`);
 
 --
--- Índexs per a la taula `rol`
+-- Indices de la tabla `rol`
 --
 ALTER TABLE `rol`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índexs per a la taula `shirt`
+-- Indices de la tabla `shirt`
 --
 ALTER TABLE `shirt`
   ADD PRIMARY KEY (`id`),
@@ -164,55 +166,55 @@ ALTER TABLE `shirt`
   ADD KEY `IDX_8BA5EC10A76ED395` (`user_id`);
 
 --
--- Índexs per a la taula `users`
+-- Indices de la tabla `user`
 --
-ALTER TABLE `users`
+ALTER TABLE `user`
   ADD PRIMARY KEY (`id`),
   ADD KEY `IDX_1483A5E94BAB96C` (`rol_id`);
 
 --
--- AUTO_INCREMENT per les taules bolcades
+-- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT per la taula `category`
+-- AUTO_INCREMENT de la tabla `category`
 --
 ALTER TABLE `category`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT per la taula `rol`
+-- AUTO_INCREMENT de la tabla `rol`
 --
 ALTER TABLE `rol`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT per la taula `shirt`
+-- AUTO_INCREMENT de la tabla `shirt`
 --
 ALTER TABLE `shirt`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT per la taula `users`
+-- AUTO_INCREMENT de la tabla `user`
 --
-ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+ALTER TABLE `user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- Restriccions per a les taules bolcades
+-- Restricciones para tablas volcadas
 --
 
 --
--- Restriccions per a la taula `shirt`
+-- Filtros para la tabla `shirt`
 --
 ALTER TABLE `shirt`
   ADD CONSTRAINT `FK_8BA5EC1012469DE2` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`),
-  ADD CONSTRAINT `FK_8BA5EC10A76ED395` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+  ADD CONSTRAINT `FK_8BA5EC10A76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
 
 --
--- Restriccions per a la taula `users`
+-- Filtros para la tabla `user`
 --
-ALTER TABLE `users`
+ALTER TABLE `user`
   ADD CONSTRAINT `FK_1483A5E94BAB96C` FOREIGN KEY (`rol_id`) REFERENCES `rol` (`id`);
 COMMIT;
 

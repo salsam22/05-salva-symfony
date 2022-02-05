@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Temps de generació: 04-02-2022 a les 13:30:18
+-- Temps de generació: 04-02-2022 a les 12:14:57
 -- Versió del servidor: 10.4.21-MariaDB
 -- Versió de PHP: 7.4.23
 
@@ -59,11 +59,11 @@ CREATE TABLE `doctrine_migration_versions` (
 --
 
 INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_time`) VALUES
-('DoctrineMigrations\\Version20220128111456', '2022-02-04 12:49:12', 245),
-('DoctrineMigrations\\Version20220131104400', '2022-02-04 12:49:12', 276),
-('DoctrineMigrations\\Version20220131105516', '2022-02-04 12:49:13', 1733),
-('DoctrineMigrations\\Version20220202093807', '2022-02-04 12:49:14', 1797),
-('DoctrineMigrations\\Version20220202094155', '2022-02-04 12:49:16', 1370);
+('DoctrineMigrations\\Version20220128111456', '2022-02-04 12:09:56', 239),
+('DoctrineMigrations\\Version20220131104400', '2022-02-04 12:09:57', 541),
+('DoctrineMigrations\\Version20220131105516', '2022-02-04 12:09:57', 1623),
+('DoctrineMigrations\\Version20220202093807', '2022-02-04 12:09:59', 1515),
+('DoctrineMigrations\\Version20220202094155', '2022-02-04 12:10:00', 1028);
 
 -- --------------------------------------------------------
 
@@ -114,26 +114,24 @@ INSERT INTO `shirt` (`id`, `title`, `description`, `image`, `upload_date`, `cate
 -- --------------------------------------------------------
 
 --
--- Estructura de la taula `user`
+-- Estructura de la taula `users`
 --
 
-CREATE TABLE `user` (
+CREATE TABLE `users` (
   `id` int(11) NOT NULL,
-  `name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `username` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `avatar` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `rol_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Bolcament de dades per a la taula `user`
+-- Bolcament de dades per a la taula `users`
 --
 
-INSERT INTO `user` (`id`, `name`, `username`, `password`, `email`, `avatar`, `rol_id`) VALUES
-(1, 'ADMIN', 'ADMIN', '1234', 'admin@admin.com', NULL, 1),
-(2, 'USER', 'USER', '1234', 'user@user.com', NULL, 3);
+INSERT INTO `users` (`id`, `username`, `password`, `avatar`, `rol_id`) VALUES
+(1, 'admin', '1234', NULL, 1),
+(2, 'user', '1234', NULL, 3);
 
 --
 -- Índexs per a les taules bolcades
@@ -166,9 +164,9 @@ ALTER TABLE `shirt`
   ADD KEY `IDX_8BA5EC10A76ED395` (`user_id`);
 
 --
--- Índexs per a la taula `user`
+-- Índexs per a la taula `users`
 --
-ALTER TABLE `user`
+ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD KEY `IDX_1483A5E94BAB96C` (`rol_id`);
 
@@ -195,9 +193,9 @@ ALTER TABLE `shirt`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT per la taula `user`
+-- AUTO_INCREMENT per la taula `users`
 --
-ALTER TABLE `user`
+ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
@@ -209,12 +207,12 @@ ALTER TABLE `user`
 --
 ALTER TABLE `shirt`
   ADD CONSTRAINT `FK_8BA5EC1012469DE2` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`),
-  ADD CONSTRAINT `FK_8BA5EC10A76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
+  ADD CONSTRAINT `FK_8BA5EC10A76ED395` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
--- Restriccions per a la taula `user`
+-- Restriccions per a la taula `users`
 --
-ALTER TABLE `user`
+ALTER TABLE `users`
   ADD CONSTRAINT `FK_1483A5E94BAB96C` FOREIGN KEY (`rol_id`) REFERENCES `rol` (`id`);
 COMMIT;
 

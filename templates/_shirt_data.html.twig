@@ -1,9 +1,13 @@
-<div class="card" style="width: 18rem;">
-    <img src="{{ asset("images/" ~ shirt.image) }}" class="card-img-top" alt="{{ shirt.title }}">
-    <div class="card-body">
-        <h5 class="card-title">{{ shirt.title }}</h5>
-        <p class="card-text">{{ shirt.description }}</p>
-        <p class="card-text"> {{ shirt.uploaddate | date("d-m-Y")}} </p>
-        <a href="{{path('shirt_show', {id: shirt.id})}}" class="btn btn-primary">Go shirt</a>
+<div class="row">
+    <div class="d-flex justify-content-center">
+        <div class="card" style="width: 18rem;">
+            <img src="{{ asset("images/" ~ shirt.image) }}" class="card-img-top" alt="{{ shirt.title }}">
+            <div class="card-body">
+                <h5 class="card-title">{{ shirt.title }}</h5>
+                <p class="card-text">{{ shirt.description }}</p>
+                <p class="card-text"> {{ shirt.uploaddate | date("d-m-Y") }} </p>
+                <a href="{{ path('shirt_show', {id: shirt.id}) }}" class="btn btn-primary">Go shirt</a>
+            </div>
+        </div>
     </div>
 </div>

@@ -21,13 +21,12 @@
         </div>
     </div>
 
-    <div class="d-flex justify-content-center">
-        {% if shirts %}
-            {% for shirt in shirts %}
-                {{ include ('_shirt_data.html.twig', {'shirt': shirt }) }}
-            {% endfor %}
-        {% else %}
-            <p>No shirts found</p>
-        {% endif %}
-    </div>
+                {% if shirts %}
+                    {% for shirt in shirts %}
+                        {{ include ('_shirt_data.html.twig', {'shirt': shirt }) }}
+                    {% endfor %}
+                {% else %}
+                    <p>No shirts found</p>
+                {% endif %}
+
 {% endblock %}

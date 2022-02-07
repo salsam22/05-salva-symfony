@@ -15,7 +15,6 @@ class HomeController extends AbstractController
      */
     public function home(ShirtRepository $shirtRepository, CategoryRepository $categoryRepository): Response
     {
-
         $shirts = $shirtRepository->findAll();
         $categories = $categoryRepository->findAll();
         return $this->render('home.html.twig', [

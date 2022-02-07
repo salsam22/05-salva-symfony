@@ -80,10 +80,10 @@ class AppFixtures extends Fixture
 
         $manager->flush();
 
-        for ($i=0; $i<16; $i++) {
+        for ($i=0; $i<18; $i++) {
             $shirt = new Shirt();
-            $shirt->setTitle(ucwords($this->faker->words(4, true)));
-            $shirt->setDescription($this->faker->text(250));
+            $shirt->setTitle(ucwords($this->faker->words(3, true)));
+            $shirt->setDescription($this->faker->text(150));
             $shirt->setUploadDate($this->faker->dateTime);
             $shirt->setImage($this->faker->file('assets', 'public/images', false));
             $shirt->setCategory($categories[\array_rand($categories)]);

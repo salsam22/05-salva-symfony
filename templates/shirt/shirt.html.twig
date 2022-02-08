@@ -12,8 +12,6 @@
         .photo-show {
             width: 750px;
         }
-
-
     </style>
 
     <div class="container-fluid mt-5">
@@ -22,15 +20,16 @@
                 <div class="card mb-3" style="max-width: 1024px;">
                     <div class="row g-0">
                         <div class="col-md-4">
-                            <img src="{{ asset("images/" ~ shirt.image) }}" class="img-fluid photo-show" alt="...">
+                            <img src="{{ asset("images/" ~ shirt.image) }}" class="img-fluid photo-show" alt="{{ shirt.title }}<">
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
                                 <h5 class="card-title">{{ shirt.title }}</h5>
                                 <p class="card-text">{{ shirt.description }}</p>
-                                <p class="card-text"><small
-                                            class="text-muted">{{ shirt.uploaddate | date("d-m-Y") }}</small></p>
-                                {{ include('shirt/_delete_form.html.twig') }}
+                                <p class="card-text">{{ shirt.user }}</p>
+                                <p class="card-text">
+                                    <small class="text-muted">{{ shirt.uploaddate | date("d-m-Y") }}</small>
+                                </p>
                             </div>
                         </div>
                     </div>

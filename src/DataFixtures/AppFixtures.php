@@ -24,10 +24,10 @@ class AppFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
-        $categoriesDefault = ['Black', 'Blue', 'Red', 'Yellow'];
+        $categoriesDefault = ['S', 'M', 'L', 'XL', 'XXL'];
         $categories = [];
 
-        for ($i=0; $i<4; $i++) {
+        for ($i=0; $i<5; $i++) {
             $category = new Category();
             $category->setName($categoriesDefault[$i]);
             $manager->persist($category);

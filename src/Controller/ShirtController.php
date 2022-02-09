@@ -41,7 +41,7 @@ class ShirtController extends AbstractController
     /**
      * @Route ("/show/{id}", name="shirt_show")
      */
-    public function show($id, ShirtRepository $shirtRepository) {
+    public function show($id, ShirtRepository $shirtRepository): Response {
 
         $shirt = $shirtRepository->find($id);
         return $this->render('shirt/shirt.html.twig', [

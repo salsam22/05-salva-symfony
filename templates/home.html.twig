@@ -6,19 +6,18 @@
 
     <div class="d-flex justify-content-end mt-5 me-5">
         <div class="btn-group dropstart">
-            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                Categories
-            </button>
-            <ul class="dropdown-menu">
-                {% if categories %}
-                    {% for category in categories %}
-                        {{ include ('_category_data.html.twig', {'category': category }) }}
-                    {% endfor %}
-                {% else %}
-                    <p>No category found</p>
-                {% endif %}
-            </ul>
+            <form method="post">
+                <select name="category">
+                    {% if categories %}
+                        {% for category in categories %}
+                            {{ include ('_category_data.html.twig', {'category': category }) }}
+                        {% endfor %}
+                    {% else %}
+                        <p>No category found</p>
+                    {% endif %}
+                </select>
+                <input type="submit" class="btn btn-secondary p-1"/>
+            </form>
         </div>
     </div>
     <div class="container">

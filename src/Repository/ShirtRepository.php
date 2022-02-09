@@ -19,6 +19,23 @@ class ShirtRepository extends ServiceEntityRepository
         parent::__construct($registry, Shirt::class);
     }
 
+    public function orderByDate() {
+        return $this->createQueryBuilder('s')
+            ->orderBy('s.upload_date', 'DESC')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    public function filterCategory($value) {
+        return $this->createQueryBuilder('s')
+            ->andWhere('s.category = :val')
+            ->orderBy('s.upload_date', 'DESC')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
     // /**
     //  * @return Shirt[] Returns an array of Shirt objects
     //  */

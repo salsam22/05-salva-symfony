@@ -13,15 +13,19 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController
 {
 
-
-
     /**
      * @Route("/", name="home")
      */
     public function home(ShirtRepository $shirtRepository, CategoryRepository $categoryRepository, PaginatorInterface $paginator, Request $request): Response
     {
-        $shirts = $shirtRepository->findAll();
-        $categories = $categoryRepository->findAll();
+        $categoriesValue = $categoryRepository->findAll();
+        $type = $request->get("category");
+        if (empty($type)) {
+            $shirts = $shirtRepository->orderByDate();
+        } else {
+            $shirts = $shirtRepository->findBy(["category"=>$type]);
+        }
+
         $appointments = $paginator->paginate(
         // Consulta Doctrine, no resultados
             $shirts,
@@ -32,7 +36,7 @@ class HomeController extends AbstractController
         );
         return $this->render('home.html.twig', [
             "shirts"=>$appointments,
-            "categories"=>$categories
+            "categories"=>$categoriesValue
         ]);
     }
 }

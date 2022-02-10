@@ -27,9 +27,23 @@ class ShirtRepository extends ServiceEntityRepository
             ;
     }
 
-    public function filterCategory($value) {
+    public function filterDate($startDate, $endDate) {
         return $this->createQueryBuilder('s')
-            ->andWhere('s.category = :val')
+            ->where('s.upload_date >= :startDate')
+            ->andWhere('s.upload_date <= :endDate')
+            ->setParameter('startDate', $startDate)
+            ->setParameter('endDate', $endDate)
+            ->orderBy('s.upload_date', 'DESC')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    public function searchByWords($value) {
+        return $this->createQueryBuilder('s')
+            ->where("s.title LIKE %:value%")
+            ->orWhere("s.description LIKE %:value%")
+            ->setParameter('value', $value)
             ->orderBy('s.upload_date', 'DESC')
             ->getQuery()
             ->getResult()

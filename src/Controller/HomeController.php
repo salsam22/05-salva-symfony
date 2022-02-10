@@ -19,11 +19,23 @@ class HomeController extends AbstractController
     public function home(ShirtRepository $shirtRepository, CategoryRepository $categoryRepository, PaginatorInterface $paginator, Request $request): Response
     {
         $categoriesValue = $categoryRepository->findAll();
-        $type = $request->get("category");
-        if (empty($type)) {
-            $shirts = $shirtRepository->orderByDate();
+        $filterCategory = $request->get("category");
+        $startDate = $request->get("start_date");
+        $endDate = $request->get("end_date");
+        $searcher = $request->get("searcher");
+
+        if (empty($startDate) || empty($endDate)) {
+            if (empty($filterCategory)) {
+                if (empty($searcher)) {
+                    $shirts = $shirtRepository->orderByDate();
+                } else {
+                    $shirts = $shirtRepository->searchByWords($searcher);
+                }
+            } else {
+                $shirts = $shirtRepository->findBy(["category"=>$filterCategory]);
+            }
         } else {
-            $shirts = $shirtRepository->findBy(["category"=>$type]);
+            $shirts = $shirtRepository->filterDate($startDate, $endDate);
         }
 
         $appointments = $paginator->paginate(

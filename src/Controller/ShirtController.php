@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Shirt;
 use App\Form\ShirtType;
 use App\Repository\ShirtRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -41,11 +42,13 @@ class ShirtController extends AbstractController
     /**
      * @Route ("/show/{id}", name="shirt_show")
      */
-    public function show($id, ShirtRepository $shirtRepository): Response {
+    public function show($id, ShirtRepository $shirtRepository, UserRepository $userRepository): Response {
 
         $shirt = $shirtRepository->find($id);
+        $user = $userRepository->find($shirt->getUser());
         return $this->render('shirt/shirt.html.twig', [
             'shirt' => $shirt,
+            'user' => $user
         ]);
     }
 

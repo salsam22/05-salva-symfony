@@ -116,7 +116,7 @@ class Shirt
 
     public function getUser(): ?String
     {
-        return $this->user->getUsername();
+        return $this->user->getId();
     }
 
     public function setUser(?User $user): self

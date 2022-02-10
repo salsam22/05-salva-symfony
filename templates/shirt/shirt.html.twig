@@ -3,30 +3,19 @@
 {% block title %}{{ shirt.title }}{% endblock %}
 
 {% block body %}
-    <style>
-        .card-show {
-            justify-content: center;
-            display: flex;
-        }
-
-        .photo-show {
-            width: 750px;
-        }
-    </style>
-
     <div class="container-fluid mt-5">
         <div class="row">
-            <div class="col-12 card-show">
+            <div class="col-12 d-flex justify-content-center">
                 <div class="card mb-3" style="max-width: 1024px;">
                     <div class="row g-0">
                         <div class="col-md-4">
-                            <img src="{{ asset("images/" ~ shirt.image) }}" class="img-fluid photo-show" alt="{{ shirt.title }}<">
+                            <img src="{{ asset("images/" ~ shirt.image) }}" class="img-fluid" alt="{{ shirt.title }}<">
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
                                 <h5 class="card-title">{{ shirt.title }}</h5>
                                 <p class="card-text">{{ shirt.description }}</p>
-                                <a href="{#{{ path('user_show', {'id': user.id}) }}#}" class="card-text">{{ shirt.user }}</a>
+                                <a href="{{ path('user_show', {'id': shirt.user}) }}" class="card-text">{{ user.name }}</a>
                                 <p class="card-text">
                                     <small class="text-muted">{{ shirt.uploaddate | date("d-m-Y") }}</small>
                                 </p>

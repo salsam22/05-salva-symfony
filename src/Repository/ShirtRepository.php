@@ -41,9 +41,9 @@ class ShirtRepository extends ServiceEntityRepository
 
     public function searchByWords($value) {
         return $this->createQueryBuilder('s')
-            ->where("s.title LIKE %:value%")
-            ->orWhere("s.description LIKE %:value%")
-            ->setParameter('value', $value)
+            ->where("s.title LIKE :value")
+            ->orWhere("s.description LIKE :value")
+            ->setParameter('value', "%$value%")
             ->orderBy('s.upload_date', 'DESC')
             ->getQuery()
             ->getResult()

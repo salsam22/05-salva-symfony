@@ -35,10 +35,10 @@ class AppFixtures extends Fixture
         }
         $manager->flush();
 
-        $rolesDefault = ['ROLE_ADMIN', 'ROLE_CREATOR', 'ROLE_USER'];
+        $rolesDefault = ['ROLE_ADMIN', 'ROLE_USER'];
         $roles = [];
 
-        for ($i=0; $i<3; $i++) {
+        for ($i=0; $i<2; $i++) {
             $rol = new Rol();
             $rol->setName($rolesDefault[$i]);
             $manager->persist($rol);
@@ -49,7 +49,7 @@ class AppFixtures extends Fixture
         $users = [];
 
         $user = new User();
-        $user->setName('administrador');
+        $user->setName('Administrador');
         $user->setEmail('admin@admin.com');
         $user->setUsername('admin');
         $password = $this->hasher->hashPassword($user, 'admin');
@@ -59,22 +59,12 @@ class AppFixtures extends Fixture
         $users[] = $user;
 
         $user = new User();
-        $user->setName('creador');
-        $user->setEmail('creator@creator.com');
-        $user->setUsername('creator');
-        $password = $this->hasher->hashPassword($user, 'creator');
-        $user->setPassword($password);
-        $user->setRol($roles[1]);
-        $manager->persist($user);
-        $users[] = $user;
-
-        $user = new User();
-        $user->setName('usuari');
+        $user->setName('Usuari');
         $user->setEmail('user@user.com');
         $user->setUsername('user');
         $password = $this->hasher->hashPassword($user, 'user');
         $user->setPassword($password);
-        $user->setRol($roles[2]);
+        $user->setRol($roles[1]);
         $manager->persist($user);
         $users[] = $user;
 

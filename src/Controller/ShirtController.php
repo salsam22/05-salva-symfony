@@ -45,10 +45,8 @@ class ShirtController extends AbstractController
     public function show($id, ShirtRepository $shirtRepository, UserRepository $userRepository): Response {
 
         $shirt = $shirtRepository->find($id);
-        $user = $userRepository->find($shirt->getUser());
         return $this->render('shirt/shirt.html.twig', [
             'shirt' => $shirt,
-            'user' => $user
         ]);
     }
 

@@ -11,8 +11,8 @@
         </div>
         <div class="row mt-5">
             <div class="col-3">
-                <div>
-                    <img src="{{ user.avatar }}" alt="{{ user.name }}"/>
+                <div class="text-center">
+                    <img width="250px" class="rounded-circle" src="/imgAvatar/{{ user.avatar }}" alt="avatar del usuario {{ user.name }}"/>
                 </div>
             </div>
             <div class="col-6 text-center">
@@ -30,6 +30,12 @@
                         <th class="text-end">Username: </th>
                         <td>{{ user.username }}</td>
                     </tr>
+                    {% if (app.user == user or is_granted('ROLE_ADMIN'))%}
+                    <tr>
+                        <th></th>
+                        <td><a href="{{ path('user_edit', {'id': user.id}) }}" class="btn btn-secondary me-1"><i class="bi bi-pencil-square"></i></a></td>
+                    </tr>
+                    {% endif %}
                     </tbody>
                 </table>
             </div>

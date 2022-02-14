@@ -37,7 +37,8 @@
 
                 {% if (app.user) %}
                     <div class="d-flex justify-content-end">
-                        <a class="nav-link text-decoration-none text-dark" href="{{ path('login') }}">{{ app.user.name }}</a>
+                        <img width="40px" class="rounded-circle" alt="avatar del usuario {{ app.user.name }}" src="/imgAvatar/{{ app.user.avatar }}">
+                        <a class="nav-link text-decoration-none text-dark" href="{{ path('user_show', {'id': app.user.id}) }}">{{ app.user.name }}</a>
                         <a class="nav-link text-decoration-none text-dark" href="#"><i class="bi bi-basket2"></i></a>
                         <a class="nav-link text-decoration-none text-dark" href="{{ path('logout') }}"><i class="bi bi-door-open"></i></a>
                     </div>

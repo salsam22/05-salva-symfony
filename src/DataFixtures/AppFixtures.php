@@ -55,6 +55,7 @@ class AppFixtures extends Fixture
         $password = $this->hasher->hashPassword($user, 'admin');
         $user->setPassword($password);
         $user->setRol($roles[0]);
+        $user->setAvatar("anonymous.png");
         $manager->persist($user);
         $users[] = $user;
 
@@ -65,6 +66,7 @@ class AppFixtures extends Fixture
         $password = $this->hasher->hashPassword($user, 'user');
         $user->setPassword($password);
         $user->setRol($roles[1]);
+        $user->setAvatar("anonymous.png");
         $manager->persist($user);
         $users[] = $user;
 

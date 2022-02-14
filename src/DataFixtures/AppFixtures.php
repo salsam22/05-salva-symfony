@@ -11,15 +11,18 @@ use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
 use Faker\Generator;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class AppFixtures extends Fixture
 {
     private UserPasswordHasherInterface $hasher;
     private Generator $faker;
+    private ParameterBagInterface $parameterBag;
 
-    public function __construct(UserPasswordHasherInterface $hasher) {
+    public function __construct(UserPasswordHasherInterface $hasher, ParameterBagInterface $parameterBag) {
         $this->hasher = $hasher;
         $this->faker = Factory::create();
+        $this->parameterBag = $parameterBag;
     }
 
     public function load(ObjectManager $manager)
@@ -77,7 +80,8 @@ class AppFixtures extends Fixture
             $shirt->setTitle(ucwords($this->faker->words(3, true)));
             $shirt->setDescription($this->faker->text(150));
             $shirt->setUploadDate($this->faker->dateTime);
-            $shirt->setImage($this->faker->file('assets', 'public/images', false));
+            //$shirt->setImage($this->faker->file('assets', 'public/images', false));
+            $shirt->setImage($this->faker->file('assets', 'public/' . $this->parameterBag->get('app.posters.dir'), false));
             $shirt->setCategory($categories[\array_rand($categories)]);
             $shirt->setUser($users[\array_rand($users)]);
             $manager->persist($shirt);

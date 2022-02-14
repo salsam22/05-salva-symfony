@@ -24,6 +24,14 @@ class RegistrationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
+
+            $directory = '/public/imgAvatar';
+
+            $file = $form['avatar']->getData();
+            $filename = $file->getClientOriginalName();
+
+            $user->setAvatar($filename);
+
             $user->setPassword(
             $userPasswordHasher->hashPassword(
                     $user,

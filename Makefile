@@ -1,6 +1,10 @@
 PHP_CMD = php
 .DEFAULT_GOAL:=help
 rebuild:
+
+	@ echo "Instal·lant dependències..."
+	-composer install -n
+
 	@ echo "Esborrant la base de dades..."
 	-$(PHP_CMD) bin/console doctrine:database:drop -n --force
 
@@ -11,9 +15,9 @@ rebuild:
 	$(PHP_CMD) bin/console doctrine:migrations:migrate -n
 
 	@ echo "Esborrant i creant el directori si no existeix.."
-	-rm -rf public/images
-	-mkdir -p public/images
-	 chmod 777 -R public/images
+	#-rm -rf public/images
+	#-mkdir -p public/images
+	# chmod 777 -R public/images
 
 	@ echo "Carregant les dades..."
 	$(PHP_CMD) bin/console doctrine:fixtures:load -n

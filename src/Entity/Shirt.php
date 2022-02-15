@@ -24,24 +24,24 @@ class Shirt
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Assert\NotBlank()
+     * @Assert\NotNull(message="El nombre del torneo es obligatorio.")
      */
     private $title;
 
     /**
      * @ORM\Column(type="text")
-     * @Assert\NotBlank
+     * @Assert\Length(min=10, max = 1000)
+     * @Assert\NotNull(message="El nombre del torneo es obligatorio.")
      */
     private $description;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank
      */
     private $image;
 
     /**
-     * @Vich\UploadableField(mapping="shirt_poster", fileNameProperty="poster")
+     * @Vich\UploadableField(mapping="shirt_poster", fileNameProperty="image")
      * @var File
      */
     private $imagesFile;
@@ -54,14 +54,14 @@ class Shirt
         return $this->imagesFile;
     }
 
-    public function setImagesFile(File $image = null)
+    public function setImagesFile(File $image2 = null)
     {
-        $this->imagesFile = $image;
+        $this->imagesFile = $image2;
 
         // VERY IMPORTANT:
         // It is required that at least one field changes if you are using Doctrine,
         // otherwise the event listeners won't be called and the file is lost
-        if ($image) {
+        if ($image2) {
             // if 'updatedAt' is not defined in your entity, use another property
             $this->updatedAt = new \DateTimeImmutable('now');
         }
@@ -75,6 +75,7 @@ class Shirt
     /**
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="shirts")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotNull()
      */
     private $category;
 
@@ -160,4 +161,6 @@ class Shirt
 
         return $this;
     }
+
+
 }

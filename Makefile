@@ -15,9 +15,9 @@ rebuild:
 	$(PHP_CMD) bin/console doctrine:migrations:migrate -n
 
 	@ echo "Esborrant i creant el directori si no existeix.."
-	#-rm -rf public/images
-	#-mkdir -p public/images
-	# chmod 777 -R public/images
+	#-rm -rf public/images/my_thumb/images
+	#-mkdir -p public/images/my_thumb/images
+	# chmod 777 -R public/images/my_thumb/images
 
 	@ echo "Carregant les dades..."
 	$(PHP_CMD) bin/console doctrine:fixtures:load -n

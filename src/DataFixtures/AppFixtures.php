@@ -81,7 +81,7 @@ class AppFixtures extends Fixture
             $shirt->setDescription($this->faker->text(150));
             $shirt->setUploadDate($this->faker->dateTime);
             //$shirt->setImage($this->faker->file('assets', 'public/images', false));
-            $shirt->setImage($this->faker->file('assets', 'public/' . $this->parameterBag->get('app.posters.dir'), false));
+            $shirt->setImage($this->faker->file('assets', 'public/' . $this->parameterBag->get('app.posters.dir') . '/my_thumb/images', false));
             $shirt->setCategory($categories[\array_rand($categories)]);
             $shirt->setUser($users[\array_rand($users)]);
             $manager->persist($shirt);

@@ -4,9 +4,14 @@ namespace App\Entity;
 
 use App\Repository\ShirtRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+
 
 /**
  * @ORM\Entity(repositoryClass=ShirtRepository::class)
+ * @Vich\Uploadable
  */
 class Shirt
 {
@@ -19,18 +24,48 @@ class Shirt
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Assert\NotBlank()
      */
     private $title;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank
      */
     private $description;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $image;
+
+    /**
+     * @Vich\UploadableField(mapping="shirt_poster", fileNameProperty="poster")
+     * @var File
+     */
+    private $imagesFile;
+
+    /**
+     * @return File
+     */
+    public function getImagesFile(): ?File
+    {
+        return $this->imagesFile;
+    }
+
+    public function setImagesFile(File $image = null)
+    {
+        $this->imagesFile = $image;
+
+        // VERY IMPORTANT:
+        // It is required that at least one field changes if you are using Doctrine,
+        // otherwise the event listeners won't be called and the file is lost
+        if ($image) {
+            // if 'updatedAt' is not defined in your entity, use another property
+            $this->updatedAt = new \DateTimeImmutable('now');
+        }
+    }
 
     /**
      * @ORM\Column(type="date")

@@ -9,5 +9,10 @@ vich_uploader:
     mappings:
         shirt_poster:
             uri_prefix:         '/%app.posters.dir%'
-            upload_destination: '%kernel.project_dir%/public/%app.posters.dir%'
+            upload_destination: '%kernel.project_dir%/public/images/my_thumb/%app.posters.dir%'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+
+        user_avatar:
+            uri_prefix:         '/%app.avatar.dir%'
+            upload_destination: '%kernel.project_dir%/public/%app.avatar.dir%'
             namer: Vich\UploaderBundle\Naming\SmartUniqueNamer

@@ -6,6 +6,8 @@
 parameters:
     app.posters.dir: 'images'
     app.posters.thumbnails_dir: '%app.posters.dir%'
+    app.avatar.dir: 'images/my_thumb/imgAvatar'
+    app.avatar.thumbnails_dir: '%app.avatar.dir%'
 services:
     # default configuration for services in *this* file
     _defaults:

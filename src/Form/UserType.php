@@ -8,6 +8,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class UserType extends AbstractType
 {
@@ -18,7 +19,16 @@ class UserType extends AbstractType
             ->add('email')
             ->add('username')
             ->add('password')
-            ->add('avatar')
+            ->add('imagesFile', VichImageType::class, [
+                'required' => false,
+                'allow_delete' => true,
+                'delete_label' => '...',
+                'download_label' => '...',
+                'download_uri' => true,
+                'image_uri' => true,
+                'imagine_pattern' => 'my_thumb/images',
+                'asset_helper' => true,
+            ])
             ->add('rol', EntityType::class, [
                 'class' => Rol::class,
                 'choice_label' => 'name'

@@ -14,6 +14,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class RegistrationFormType extends AbstractType
 {
@@ -48,7 +49,16 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('avatar', FileType::class)
+            ->add('imagesFile', VichImageType::class, [
+                'required' => false,
+                'allow_delete' => true,
+                'delete_label' => '...',
+                'download_label' => '...',
+                'download_uri' => true,
+                'image_uri' => true,
+                'imagine_pattern' => 'my_thumb/images',
+                'asset_helper' => true,
+            ])
             ->add('rol',EntityType::class, [
                 'class' => Rol::class,
                 'choice_label' => 'name'

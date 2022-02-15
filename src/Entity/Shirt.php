@@ -24,14 +24,14 @@ class Shirt
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Assert\NotNull(message="El nombre del torneo es obligatorio.")
+     * @Assert\NotNull(message="El titulo de la pelicula es obligatorio.")
      */
     private $title;
 
     /**
      * @ORM\Column(type="text")
      * @Assert\Length(min=10, max = 1000)
-     * @Assert\NotNull(message="El nombre del torneo es obligatorio.")
+     * @Assert\NotNull(message="La descripcion es obligatoria.")
      */
     private $description;
 

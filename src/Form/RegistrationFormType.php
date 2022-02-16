@@ -56,7 +56,7 @@ class RegistrationFormType extends AbstractType
                 'download_label' => '...',
                 'download_uri' => true,
                 'image_uri' => true,
-                'imagine_pattern' => 'my_thumb/images',
+                'imagine_pattern' => 'my_thumb/imgAvatar',
                 'asset_helper' => true,
             ])
             ->add('rol',EntityType::class, [

@@ -20,13 +20,6 @@ class ShirtType extends AbstractType
             ->add('description')
             ->add('imagesFile', VichImageType::class, [
                 'required' => false,
-                'allow_delete' => true,
-                'delete_label' => '...',
-                'download_label' => '...',
-                'download_uri' => true,
-                'image_uri' => true,
-                'imagine_pattern' => 'my_thumb/images',
-                'asset_helper' => true,
             ])
             ->add('upload_date')
             ->add('category',EntityType::class, [

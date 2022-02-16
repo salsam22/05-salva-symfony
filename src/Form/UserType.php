@@ -21,13 +21,7 @@ class UserType extends AbstractType
             ->add('password')
             ->add('imagesFile', VichImageType::class, [
                 'required' => false,
-                'allow_delete' => true,
-                'delete_label' => '...',
-                'download_label' => '...',
                 'download_uri' => true,
-                'image_uri' => true,
-                'imagine_pattern' => 'my_thumb/images',
-                'asset_helper' => true,
             ])
             ->add('rol', EntityType::class, [
                 'class' => Rol::class,

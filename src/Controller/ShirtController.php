@@ -22,11 +22,18 @@ class ShirtController extends AbstractController
      */
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
+        if ($this->getUser() == null) {
+            return $this->redirectToRoute('login');
+        }
         $shirt = new Shirt();
         $form = $this->createForm(ShirtType::class, $shirt);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $this->addFlash(
+                'notice',
+                'Camiseta creada correctamente!'
+            );
             $entityManager->persist($shirt);
             $entityManager->flush();
 
@@ -79,6 +86,11 @@ class ShirtController extends AbstractController
             $entityManager->remove($shirt);
             $entityManager->flush();
         }
+        $title = $shirt->getTitle();
+        $this->addFlash(
+            'notice',
+            'Camiseta "' . $title . '" borrada correctamente!'
+        );
 
         return $this->redirectToRoute('home', [], Response::HTTP_SEE_OTHER);
     }

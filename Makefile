@@ -14,10 +14,13 @@ rebuild:
 	@ echo "Creant l'estructura..."
 	$(PHP_CMD) bin/console doctrine:migrations:migrate -n
 
-	@ echo "Esborrant i creant el directori si no existeix.."
-	#-rm -rf public/images/my_thumb/images
-	#-mkdir -p public/images/my_thumb/images
-	# chmod 777 -R public/images/my_thumb/images
+	@ echo "Esborrant i creant el directori si no existeix..."
+	-rm -rf public/images/my_thumb/images
+	-mkdir -p public/images/my_thumb/images
+	chmod 777 -R public/images/my_thumb/images
+	-rm -rf public/images/my_thumb/imgAvatar
+	-mkdir -p public/images/my_thumb/imgAvatar
+	chmod 777 -R public/images/my_thumb/imgAvatar
 
 	@ echo "Carregant les dades..."
 	$(PHP_CMD) bin/console doctrine:fixtures:load -n

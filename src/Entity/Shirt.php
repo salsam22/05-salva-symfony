@@ -24,7 +24,7 @@ class Shirt
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Assert\NotNull(message="El titulo de la pelicula es obligatorio.")
+     * @Assert\NotNull(message="El titulo es obligatorio.")
      */
     private $title;
 
@@ -43,6 +43,12 @@ class Shirt
     /**
      * @Vich\UploadableField(mapping="shirt_poster", fileNameProperty="image")
      * @var File
+     * @Assert\NotNull(message="La imagen es obligatoria.")
+     * @Assert\File(
+     *     maxSize = "2048k",
+     *     mimeTypes = {"image/jpg", "image/jpeg"},
+     *     mimeTypesMessage = "Please upload a valid jpg or jpeg"
+     * )
      */
     private $imagesFile;
 
@@ -69,6 +75,7 @@ class Shirt
 
     /**
      * @ORM\Column(type="date")
+     * @Assert\NotNull(message="La fecha no puede estar vacia")
      */
     private $upload_date;
 
@@ -131,7 +138,7 @@ class Shirt
         return $this->upload_date;
     }
 
-    public function setUploadDate(\DateTimeInterface $upload_date): self
+    public function setUploadDate(?\DateTimeInterface $upload_date): self
     {
         $this->upload_date = $upload_date;
 

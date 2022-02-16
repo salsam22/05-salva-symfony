@@ -20,8 +20,8 @@ class HomeController extends AbstractController
     {
         $categoriesValue = $categoryRepository->findAll();
         $filterCategory = $request->get("category");
-        $startDate = $request->get("start_date");
-        $endDate = $request->get("end_date");
+        $startDate = $request->query->get("start_date");
+        $endDate = $request->query->get("end_date");
         $searcher = $request->get("searcher");
 
         if (empty($startDate) || empty($endDate)) {

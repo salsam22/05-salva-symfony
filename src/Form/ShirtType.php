@@ -7,6 +7,7 @@ use App\Entity\Category;
 use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Vich\UploaderBundle\Form\Type\VichImageType;
@@ -19,16 +20,15 @@ class ShirtType extends AbstractType
             ->add('title')
             ->add('description')
             ->add('imagesFile', VichImageType::class, [
-                'required' => false,
+                'download_uri' => false,
+                'allow_delete' => false,
             ])
-            ->add('upload_date')
+            ->add('upload_date', DateType::class, [
+                'widget' => 'single_text'
+            ])
             ->add('category',EntityType::class, [
                 'class' => Category::class,
                 'choice_label' => 'name'
-            ])
-            ->add('user',EntityType::class, [
-                'class' => User::class,
-                'choice_label' => 'username'
             ])
         ;
     }

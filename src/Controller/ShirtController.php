@@ -30,9 +30,10 @@ class ShirtController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $shirt->setUser($this->getUser());
             $this->addFlash(
                 'notice',
-                'Camiseta creada correctamente!'
+                'Shirt "' . $shirt->getTitle() . '" created successfully!'
             );
             $entityManager->persist($shirt);
             $entityManager->flush();
@@ -66,8 +67,14 @@ class ShirtController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            /*if ($shirt->getImagesFile() == null) {
+                $shirt->setImagesFile($shirt->getImage());
+            }*/
             $entityManager->flush();
-
+            $this->addFlash(
+                'notice',
+                'Shirt "' . $shirt->getTitle() . '" edited correctly!'
+            );
             return $this->redirectToRoute('home', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -89,7 +96,7 @@ class ShirtController extends AbstractController
         $title = $shirt->getTitle();
         $this->addFlash(
             'notice',
-            'Camiseta "' . $title . '" borrada correctamente!'
+            'Shirt "' . $title . '" deleted successfully!'
         );
 
         return $this->redirectToRoute('home', [], Response::HTTP_SEE_OTHER);

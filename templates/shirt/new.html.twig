@@ -3,9 +3,21 @@
 {% block title %}New Shirt{% endblock %}
 
 {% block body %}
-    <h1>Create new Shirt</h1>
-
-    {{ include('shirt/_form.html.twig') }}
-
-    <a href="{{ path('home') }}">back to list</a>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h1>Create new Shirt</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                {{ include('shirt/_form.html.twig') }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <a href="{{ path('home') }}"><button class="btn btn-outline-info">Back to Home</button></a>
+            </div>
+        </div>
+    </div>
 {% endblock %}

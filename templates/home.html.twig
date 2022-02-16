@@ -5,7 +5,7 @@
 {% block body %}
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12">
+            <div class="col-12 px-0 text-center">
                 {% for message in app.flashes('notice') %}
                     <div class="flash-notice alert alert-success" role="alert">
                         {{ message }}

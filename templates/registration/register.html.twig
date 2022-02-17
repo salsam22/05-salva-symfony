@@ -13,23 +13,29 @@
             <div class="col-12">
                 {{ form_start(registrationForm, {attr: {'novalidate': 'novalidate'}}) }}
                 <div class="mb-3">
-                    {{ form_row(registrationForm.name, { 'attr': {'class': 'form-control'}}) }}
+                    {{ form_row(registrationForm.name) }}
                 </div>
                 <div class="mb-3">
-                    {{ form_row(registrationForm.email, { 'attr': {'class': 'form-control'}}) }}
+                    {{ form_row(registrationForm.email) }}
                 </div>
                 <div class="mb-3">
-                    {{ form_row(registrationForm.username, { 'attr': {'class': 'form-control'}}) }}
+                    {{ form_row(registrationForm.username) }}
                 </div>
                 <div class="mb-3">
-                    {{ form_row(registrationForm.plainPassword, {label: 'Password'}, { 'attr': {'class': 'form-control'}}) }}
+                    {{ form_row(registrationForm.password.first) }}
                 </div>
                 <div class="mb-3">
-                    {{ form_row(registrationForm.imagesFile, { 'attr': {'class': 'form-control'}}) }}
+                    {{ form_row(registrationForm.password.second) }}
                 </div>
                 <div class="mb-3">
-                    {{ form_row(registrationForm.rol, { 'attr': {'class': 'form-control'}}) }}
+                    {{ form_row(registrationForm.imagesFile) }}
                 </div>
+                <div class="mb-3">
+                    {{ form_row(registrationForm.rol) }}
+                </div>
+                {# <div class="mb-3">
+                    {{ form_row(registrationForm.captcha) }}
+                </div> #}
                 {{ form_row(registrationForm.agreeTerms) }}
                 <button type="submit" class="btn btn-outline-secondary btn-lg mt-4">Register</button>
                 {{ form_end(registrationForm) }}

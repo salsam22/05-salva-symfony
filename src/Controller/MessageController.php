@@ -50,7 +50,10 @@ class MessageController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
+            $this->addFlash(
+                'notice',
+                'Message "' . $message->getId() . '" created successfully!'
+            );
             $message->setTransmitter($this->getUser());
             $message->setReceiver($receiver);
             $message->setDate();

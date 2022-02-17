@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Message;
+use App\Entity\User;
 use App\Form\MessageType;
 use App\Repository\MessageRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -17,29 +18,47 @@ use Symfony\Component\Routing\Annotation\Route;
 class MessageController extends AbstractController
 {
     /**
-     * @Route("/", name="message_index", methods={"GET"})
+     * @Route("/{id}/sended", name="message_sended", methods={"GET"})
      */
-    public function index(MessageRepository $messageRepository): Response
+    public function sended(MessageRepository $messageRepository, User $user): Response
     {
         return $this->render('message/index.html.twig', [
-            'messages' => $messageRepository->findAll(),
+            'messages' => $messageRepository->findBy(['transmitter'=>$user]),
         ]);
     }
 
     /**
-     * @Route("/new", name="message_new", methods={"GET", "POST"})
+     * @Route("/{id}/received", name="message_received", methods={"GET"})
      */
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function received(MessageRepository $messageRepository, User $user): Response
     {
+        return $this->render('message/index.html.twig', [
+            'messages' => $messageRepository->findBy(['receiver'=>$user]),
+        ]);
+    }
+
+    /**
+     * @Route("/{id}/new", name="message_new", methods={"GET", "POST"})
+     */
+    public function new(Request $request, EntityManagerInterface $entityManager, User $receiver): Response
+    {
+        if ($this->getUser() == null) {
+            return $this->redirectToRoute('login');
+        }
         $message = new Message();
         $form = $this->createForm(MessageType::class, $message);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $message->setTransmitter($this->getUser());
+            $message->setReceiver($receiver);
+            $message->setDate();
+
             $entityManager->persist($message);
             $entityManager->flush();
 
-            return $this->redirectToRoute('message_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('user_show', ['id'=>$this->getUser()->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('message/new.html.twig', [
@@ -59,26 +78,6 @@ class MessageController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="message_edit", methods={"GET", "POST"})
-     */
-    public function edit(Request $request, Message $message, EntityManagerInterface $entityManager): Response
-    {
-        $form = $this->createForm(MessageType::class, $message);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
-
-            return $this->redirectToRoute('message_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->renderForm('message/edit.html.twig', [
-            'message' => $message,
-            'form' => $form,
-        ]);
-    }
-
-    /**
      * @Route("/delete/{id}", name="message_delete", methods={"POST"})
      */
     public function delete(Request $request, Message $message, EntityManagerInterface $entityManager): Response
@@ -88,6 +87,6 @@ class MessageController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('message_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('user_show', ['id'=>$this->getUser()->getId()], Response::HTTP_SEE_OTHER);
     }
 }

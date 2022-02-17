@@ -22,6 +22,7 @@ class ShirtType extends AbstractType
             ->add('imagesFile', VichImageType::class, [
                 'download_uri' => false,
                 'allow_delete' => false,
+                'label' => 'Image',
             ])
             ->add('upload_date', DateType::class, [
                 'widget' => 'single_text'

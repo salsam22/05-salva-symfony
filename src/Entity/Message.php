@@ -61,9 +61,9 @@ class Message
         return $this->date;
     }
 
-    public function setDate(\DateTimeInterface $date): self
+    public function setDate(): self
     {
-        $this->date = $date;
+        $this->date = new \DateTimeImmutable();
 
         return $this;
     }

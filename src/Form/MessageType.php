@@ -3,10 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Message;
-use App\Entity\User;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -16,17 +13,6 @@ class MessageType extends AbstractType
     {
         $builder
             ->add('content')
-            ->add('date', DateType::class, [
-                'widget' => 'single_text'
-            ])
-            ->add('transmitter',EntityType::class, [
-                'class' => User::class,
-                'choice_label' => 'name'
-            ])
-            ->add('receiver', EntityType::class, [
-                'class' => User::class,
-                'choice_label' => 'name'
-            ])
         ;
     }
 

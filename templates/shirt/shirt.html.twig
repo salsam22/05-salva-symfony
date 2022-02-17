@@ -19,7 +19,7 @@
                                     <a href="{{ path('user_show', {'id': shirt.user.id}) }}" class="card-text">{{ shirt.user.name }}</a>
                                 </div>
                                 <div class="card-text">
-                                    <a href="{{ path('message_new')}}"><button class="btn btn-outline-secondary btn-lg"><i class="bi bi-envelope-plus-fill"></i></button></a>
+                                    <a href="{{ path('message_new', {'id':shirt.user.id}) }}"><button class="btn btn-outline-secondary btn-lg"><i class="bi bi-envelope-plus-fill"></i></button></a>
                                     <a href="#"><button class="btn btn-outline-secondary btn-lg"><i class="bi bi-cart-plus-fill"></i></button></a>
                                 </div>
                                 <p class="card-text mt-3">

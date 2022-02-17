@@ -3,35 +3,44 @@
 {% block title %}Message index{% endblock %}
 
 {% block body %}
-    <h1>Message index</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Content</th>
-                <th>Date</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for message in messages %}
-            <tr>
-                <td>{{ message.id }}</td>
-                <td>{{ message.content }}</td>
-                <td>{{ message.date ? message.date|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('message_show', {'id': message.id}) }}">show</a>
-                    <a href="{{ path('message_edit', {'id': message.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('message_new') }}">Create new</a>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center my-3">
+                <h1>Messages</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Content</th>
+                        <th>Date</th>
+                        <th>Transmitter</th>
+                        <th>Receiver</th>
+                        <th>actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for message in messages %}
+                        <tr>
+                            <td>{{ message.content }}</td>
+                            <td>{{ message.date ? message.date|date('Y-m-d H:i:s') }}</td>
+                            <td>{{ message.transmitter.name }}</td>
+                            <td>{{ message.receiver.name }}</td>
+                            <td class="d-flex">
+                                <a href="{{ path('message_show', {'id': message.id}) }}" class="btn btn-outline-secondary">Show</a>
+                                {{ include('message/_delete_form.html.twig') }}
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="4">no records found</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 {% endblock %}

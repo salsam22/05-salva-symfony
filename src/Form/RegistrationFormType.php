@@ -50,14 +50,8 @@ class RegistrationFormType extends AbstractType
                 ],
             ])
             ->add('imagesFile', VichImageType::class, [
-                'required' => false,
-                'allow_delete' => true,
-                'delete_label' => '...',
-                'download_label' => '...',
-                'download_uri' => true,
-                'image_uri' => true,
-                'imagine_pattern' => 'my_thumb/imgAvatar',
-                'asset_helper' => true,
+                'allow_delete' => false,
+                'download_uri' => false,
             ])
             ->add('rol',EntityType::class, [
                 'class' => Rol::class,

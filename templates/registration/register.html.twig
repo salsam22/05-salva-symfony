@@ -3,19 +3,39 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1>Register</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                {{ form_start(registrationForm, {attr: {'novalidate': 'novalidate'}}) }}
+                <div class="mb-3">
+                    {{ form_row(registrationForm.name, { 'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="mb-3">
+                    {{ form_row(registrationForm.email, { 'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="mb-3">
+                    {{ form_row(registrationForm.username, { 'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="mb-3">
+                    {{ form_row(registrationForm.plainPassword, {label: 'Password'}, { 'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="mb-3">
+                    {{ form_row(registrationForm.imagesFile, { 'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="mb-3">
+                    {{ form_row(registrationForm.rol, { 'attr': {'class': 'form-control'}}) }}
+                </div>
+                {{ form_row(registrationForm.agreeTerms) }}
+                <button type="submit" class="btn btn-outline-secondary btn-lg mt-4">Register</button>
+                {{ form_end(registrationForm) }}
+            </div>
+        </div>
+    </div>
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.name) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.username) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.imagesFile) }}
-        {{ form_row(registrationForm.rol) }}
-        {{ form_row(registrationForm.agreeTerms) }}
 
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
 {% endblock %}

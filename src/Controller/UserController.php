@@ -33,7 +33,7 @@ class UserController extends AbstractController
      */
     public function show(User $user, ShirtRepository $shirtRepository, PaginatorInterface $paginator, Request $request): Response
     {
-        $shirts = $shirtRepository->findBy(["user"=>$user->getId()]);
+        $shirts = $shirtRepository->findByIdOrdered(["id"=>$user->getId()]);
         $appointments = $paginator->paginate(
         // Consulta Doctrine, no resultados
             $shirts,

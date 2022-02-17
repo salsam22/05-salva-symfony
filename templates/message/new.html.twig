@@ -3,9 +3,16 @@
 {% block title %}New Message{% endblock %}
 
 {% block body %}
-    <h1>Create new Message</h1>
-
-    {{ include('message/_form.html.twig') }}
-
-    <a href="{{ path('message_index') }}">back to list</a>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h1>Create new Message</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                {{ include('message/_form.html.twig') }}
+            </div>
+        </div>
+    </div>
 {% endblock %}

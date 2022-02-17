@@ -27,6 +27,16 @@ class ShirtRepository extends ServiceEntityRepository
             ;
     }
 
+    public function findByIdOrdered($id) {
+        return $this->createQueryBuilder('s')
+            ->andWhere('s.user = :id')
+            ->setParameter('id', $id)
+            ->orderBy('s.upload_date', 'DESC')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
     public function filterDate($startDate, $endDate) {
         return $this->createQueryBuilder('s')
             ->where('s.upload_date >= :startDate')

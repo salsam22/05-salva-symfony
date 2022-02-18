@@ -18,15 +18,10 @@ class UserType extends AbstractType
             ->add('name')
             ->add('email')
             ->add('username')
-            ->add('password')
             ->add('imagesFile', VichImageType::class, [
                 'download_uri' => false,
                 'allow_delete' => false,
                 'label' => 'Avatar',
-            ])
-            ->add('rol', EntityType::class, [
-                'class' => Rol::class,
-                'choice_label' => 'name'
             ])
         ;
     }

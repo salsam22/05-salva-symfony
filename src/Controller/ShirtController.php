@@ -67,9 +67,9 @@ class ShirtController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            /*if ($shirt->getImagesFile() == null) {
+            if ($shirt->getImagesFile() == null) {
                 $shirt->setImagesFile($shirt->getImage());
-            }*/
+            }
             $entityManager->flush();
             $this->addFlash(
                 'notice',

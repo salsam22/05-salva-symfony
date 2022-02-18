@@ -1,7 +1,11 @@
 <div class="col-4 p-0">
     <div class="d-flex justify-content-center mb-4">
         <div class="card mx-3 my-3">
-            <a href="{{ path('shirt_show', {'id': shirt.id}) }}"><img src="{{ asset(posters_dir ~'/'~ shirt.image) | imagine_filter('my_thumb') }}" class="card-img-top" alt="{{ shirt.title }}"></a>
+            {% if(shirt.image is null) %}
+                <a href="{{ path('shirt_show', {'id': shirt.id}) }}"><img src="/images/defaultImage/NotFound.jpg" class="card-img-top" alt="{{ shirt.title }}"></a>
+            {% else %}
+                <a href="{{ path('shirt_show', {'id': shirt.id}) }}"><img src="{{ asset(posters_dir ~'/'~ shirt.image) | imagine_filter('my_thumb') }}" class="card-img-top" alt="{{ shirt.title }}"></a>
+            {% endif %}
             <div class="card-body">
                 <h5 class="card-title">{{ shirt.title }}</h5>
                 <p class="card-text text-truncate">{{ shirt.description }}</p>

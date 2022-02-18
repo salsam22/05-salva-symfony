@@ -43,15 +43,11 @@ class RegistrationFormType extends AbstractType
                 'allow_delete' => false,
                 'download_uri' => false,
             ])
-            ->add('rol',EntityType::class, [
-                'class' => Rol::class,
-                'choice_label' => 'name'
+            ->add('captcha', CaptchaType::class, [
+                'width' => 250,
+                'height' => 75,
+                'length' => 4,
             ])
-            /*->add('captcha', CaptchaType::class, [
-                'width' => 200,
-                'height' => 50,
-                'length' => 6,
-            ])*/
         ;
     }
 

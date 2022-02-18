@@ -30,18 +30,33 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="{{ path('home') }}">Home</a>
                     </li>
-                    <li>
-                        <a class="nav-link" href="{{ path('user_index') }}">Users</a>
-                    </li>
+                    {% if (is_granted('ROLE_ADMIN')) %}
+                        <li>
+                            <a class="nav-link" href="{{ path('user_index') }}">Users</a>
+                        </li>
+                    {% endif %}
                     <li>
                         <a class="nav-link" href="{{ path('shirt_new') }}">New Shirt</a>
                     </li>
+                    {% if(app.user) %}
+                        <li>
+                            <a class="nav-link" href="{{ path('message_sended', {'id': app.user.id}) }}">Message sended</a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="{{ path('message_received', {'id': app.user.id}) }}">Message received</a>
+                        </li>
+                    {% endif %}
                 </ul>
 
                 {% if (app.user) %}
                     <div class="d-flex justify-content-end">
-                        <img width="40px" class="rounded-circle" alt="avatar del usuario {{ app.user.name }}" src="/images/my_thumb/imgAvatar/{{ app.user.avatar }}">
-                        <a class="nav-link text-decoration-none text-dark" href="{{ path('user_show', {'id': app.user.id}) }}">{{ app.user.name }}</a>
+                        {% if(app.user.avatar is null) %}
+                            <img width="40px" class="rounded-circle" alt="no existe avatar para el usuario {{ app.user.name }}" src="/images/defaultAvatar/anonymous.png">
+                            <a class="nav-link text-decoration-none text-dark" href="{{ path('user_show', {'id': app.user.id}) }}">{{ app.user.name }}</a>
+                        {% else%}
+                            <img width="40px" class="rounded-circle" alt="avatar del usuario {{ app.user.name }}" src="/images/my_thumb/imgAvatar/{{ app.user.avatar }}">
+                            <a class="nav-link text-decoration-none text-dark" href="{{ path('user_show', {'id': app.user.id}) }}">{{ app.user.name }}</a>
+                        {% endif %}
                         <a class="nav-link text-decoration-none text-dark" href="#"><i class="bi bi-basket2"></i></a>
                         <a class="nav-link text-decoration-none text-dark" href="{{ path('logout') }}"><i class="bi bi-door-open"></i></a>
                     </div>

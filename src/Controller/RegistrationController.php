@@ -26,7 +26,8 @@ class RegistrationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the password
-
+            $role = $rolRepository->findOneBy(['name'=>'ROLE_USER']);
+            $user->setRol($role);
 
             $user->setPassword(
             $userPasswordHasher->hashPassword(
@@ -38,8 +39,7 @@ class RegistrationController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
             // do anything else you need here, like send an email
-            /*role = $rolRepository->findBy(['name'=>'ROLE_USER']);
-            $user->setRol($role[]);*/
+
             return $this->redirectToRoute('login');
         }
 

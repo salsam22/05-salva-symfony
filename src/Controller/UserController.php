@@ -61,7 +61,9 @@ class UserController extends AbstractController
                 'notice',
                 'User "' . $user->getName() . '" edited correctly!'
             );
-
+            $role = $this->getUser()->getRol();
+            $user->setRol($role);
+            $user->setPassword($user->getPassword());
             $entityManager->flush();
 
             return $this->redirectToRoute('user_index', [], Response::HTTP_SEE_OTHER);

@@ -29,21 +29,25 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Assert\NotNull(message="Name is required.")
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Assert\NotNull(message="Email is required.")
      */
     private $email;
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Assert\NotNull(message="Username is required.")
      */
     private $username;
 
     /**
      * @ORM\Column(type="string", length=100)
+     * @Assert\NotNull(message="Password is required.")
      */
     private $password;
 
@@ -55,6 +59,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @Vich\UploadableField(mapping="user_avatar", fileNameProperty="avatar")
      * @var File
+     * @Assert\File(
+     *     maxSize = "1024k",
+     *     mimeTypes = {"image/jpg", "image/jpeg"},
+     *     mimeTypesMessage = "Please upload a valid jpg or jpeg"
+     * )
      */
     private $imagesFile;
 

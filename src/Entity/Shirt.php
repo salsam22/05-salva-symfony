@@ -24,28 +24,27 @@ class Shirt
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Assert\NotNull(message="El titulo es obligatorio.")
+     * @Assert\NotNull(message="Title is required.")
      */
     private $title;
 
     /**
      * @ORM\Column(type="text")
      * @Assert\Length(min=10, max = 1000)
-     * @Assert\NotNull(message="La descripcion es obligatoria.")
+     * @Assert\NotNull(message="Description is required.")
      */
     private $description;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $image;
 
     /**
      * @Vich\UploadableField(mapping="shirt_poster", fileNameProperty="image")
      * @var File
-     * @Assert\NotNull(message="La imagen es obligatoria.")
      * @Assert\File(
-     *     maxSize = "2048k",
+     *     maxSize = "1024k",
      *     mimeTypes = {"image/jpg", "image/jpeg"},
      *     mimeTypesMessage = "Please upload a valid jpg or jpeg"
      * )
@@ -102,7 +101,7 @@ class Shirt
         return $this->title;
     }
 
-    public function setTitle(string $title): self
+    public function setTitle(?string $title): self
     {
         $this->title = $title;
 
@@ -114,7 +113,7 @@ class Shirt
         return $this->description;
     }
 
-    public function setDescription(string $description): self
+    public function setDescription(?string $description): self
     {
         $this->description = $description;
 

@@ -43,11 +43,11 @@ class RegistrationFormType extends AbstractType
                 'allow_delete' => false,
                 'download_uri' => false,
             ])
-            ->add('captcha', CaptchaType::class, [
+            /*->add('captcha', CaptchaType::class, [
                 'width' => 250,
                 'height' => 75,
                 'length' => 6,
-            ])
+            ])*/
         ;
     }
 

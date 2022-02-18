@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Basket{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12 px-0 text-center">
+                {% for message in app.flashes('notice') %}
+                    <div class="flash-notice alert alert-success" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 text-center my-4">
+                <h1>{{ app.user.name }} basket</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                {% if baskets %}
+                <table class="table table-secondary">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID Shirt</th>
+                            <th scope="col">Title Shirt</th>
+                            <th scope="col">Upload Date Shirt</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        {% for basket in baskets %}
+                            <tr>
+                                <th scope="row">{{ basket.shirt.id }}</th>
+                                <td>{{ basket.shirt.title }}</td>
+                                <td>{{ basket.shirt.uploaddate ? basket.shirt.uploaddate|date('Y-m-d') : '' }}</td>
+                                <td class="d-flex">
+                                    {{ include('basket/_delete_form.html.twig') }}
+                                    <a href="{{ path('shirt_show', {'id': basket.shirt.id}) }}" class="btn btn-secondary ms-1">View</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                    <h3 class="text-center">You don't have added any shirt to the basket</h3>
+                {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 text-center">
+                <div>
+                    <a href="{{ path('basket_send', {'id': app.user.id}) }}" class="btn btn-secondary ms-1">Purchase</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

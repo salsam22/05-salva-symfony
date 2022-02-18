@@ -9,7 +9,11 @@
                 <div class="card mb-3" style="max-width: 1024px;">
                     <div class="row g-0">
                         <div class="col-md-4">
-                            <img src="{{ asset(posters_dir ~'/'~ shirt.image) | imagine_filter('my_thumb') }}" class="img-fluid" alt="{{ shirt.title }}<">
+                            {% if(shirt.image is null) %}
+                                <img src="/images/defaultImage/NotFound.jpg" class="img-fluid" alt="{{ shirt.title }}">
+                            {% else %}
+                                <img src="{{ asset(posters_dir ~'/'~ shirt.image) | imagine_filter('my_thumb') }}" class="img-fluid" alt="{{ shirt.title }}">
+                            {% endif %}
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
@@ -20,7 +24,7 @@
                                 </div>
                                 <div class="card-text">
                                     <a href="{{ path('message_new', {'id':shirt.user.id}) }}"><button class="btn btn-outline-secondary btn-lg"><i class="bi bi-envelope-plus-fill"></i></button></a>
-                                    <a href="#"><button class="btn btn-outline-secondary btn-lg"><i class="bi bi-cart-plus-fill"></i></button></a>
+                                    <a href="{{ path('basket_add', {'id':shirt.id}) }}"><button class="btn btn-outline-secondary btn-lg"><i class="bi bi-cart-plus-fill"></i></button></a>
                                 </div>
                                 <p class="card-text mt-3">
                                     <small class="text-muted">{{ shirt.uploaddate | date("d-m-Y") }}</small>

@@ -46,7 +46,7 @@ class RegistrationFormType extends AbstractType
             ->add('captcha', CaptchaType::class, [
                 'width' => 250,
                 'height' => 75,
-                'length' => 4,
+                'length' => 6,
             ])
         ;
     }

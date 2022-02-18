@@ -18,27 +18,20 @@ use Symfony\Component\Routing\Annotation\Route;
 class MessageController extends AbstractController
 {
     /**
-     * @Route("/{id}/sended", name="message_sended", methods={"GET"})
+     * @Route("/view/{id}", name="message_index", methods={"GET"})
      */
-    public function sended(MessageRepository $messageRepository, User $user): Response
+    public function index(MessageRepository $messageRepository, User $user): Response
     {
+        $sended = $messageRepository->findBy(['transmitter'=>$user]);
+        $received = $messageRepository->findBy(['receiver'=>$user]);
         return $this->render('message/index.html.twig', [
-            'messages' => $messageRepository->findBy(['transmitter'=>$user]),
+            'sended' => $sended,
+            'received' => $received,
         ]);
     }
 
     /**
-     * @Route("/{id}/received", name="message_received", methods={"GET"})
-     */
-    public function received(MessageRepository $messageRepository, User $user): Response
-    {
-        return $this->render('message/index.html.twig', [
-            'messages' => $messageRepository->findBy(['receiver'=>$user]),
-        ]);
-    }
-
-    /**
-     * @Route("/{id}/new", name="message_new", methods={"GET", "POST"})
+     * @Route("/new/{id}", name="message_new", methods={"GET", "POST"})
      */
     public function new(Request $request, EntityManagerInterface $entityManager, User $receiver): Response
     {
@@ -52,7 +45,7 @@ class MessageController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->addFlash(
                 'notice',
-                'Message "' . $message->getId() . '" created successfully!'
+                'Message created successfully!'
             );
             $message->setTransmitter($this->getUser());
             $message->setReceiver($receiver);
@@ -86,6 +79,10 @@ class MessageController extends AbstractController
     public function delete(Request $request, Message $message, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$message->getId(), $request->request->get('_token'))) {
+            $this->addFlash(
+                'notice',
+                'Message deleted successfully!'
+            );
             $entityManager->remove($message);
             $entityManager->flush();
         }

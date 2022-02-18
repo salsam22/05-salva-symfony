@@ -3,28 +3,27 @@
 {% block title %}Message{% endblock %}
 
 {% block body %}
-    <h1>Message</h1>
-
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ message.id }}</td>
-            </tr>
-            <tr>
-                <th>Content</th>
-                <td>{{ message.content }}</td>
-            </tr>
-            <tr>
-                <th>Date</th>
-                <td>{{ message.date ? message.date|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('message_index') }}">back to list</a>
-
-    <a href="{{ path('message_edit', {'id': message.id}) }}">edit</a>
-
-    {{ include('message/_delete_form.html.twig') }}
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center my-4">
+                <h1>Message</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <th>Content</th>
+                        <td>{{ message.content }}</td>
+                    </tr>
+                    <tr>
+                        <th>Date</th>
+                        <td>{{ message.date ? message.date|date('Y-m-d H:i:s') : '' }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 {% endblock %}

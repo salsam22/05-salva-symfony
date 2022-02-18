@@ -44,8 +44,7 @@
                         <th></th>
                         <td>
                             <a href="{{ path('user_edit', {'id': user.id}) }}" class="btn btn-secondary me-1"><i class="bi bi-pencil-square"></i></a>
-                            <a href="{{ path('message_sended', {'id': user.id}) }}" class="btn btn-secondary me-1">Message sended</a>
-                            <a href="{{ path('message_received', {'id': user.id}) }}" class="btn btn-secondary me-1">Message received</a>
+                            <a class="btn btn-secondary me-1" href="{{ path('message_index', {'id': user.id}) }}"><i class="bi bi-envelope-fill"></i></a>
                         </td>
                     </tr>
                     {% endif %}

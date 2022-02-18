@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
+use App\Repository\RolRepository;
 use App\Repository\ShirtRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -21,10 +22,25 @@ class UserController extends AbstractController
     /**
      * @Route("/", name="user_index", methods={"GET"})
      */
-    public function index(UserRepository $userRepository): Response
+    public function index(UserRepository $userRepository, RolRepository $rolRepository, Request $request): Response
     {
+        $roles = $rolRepository->findAll();
+        $filterRole = $request->get('roles');
+
+        if (empty($filterRole)) {
+            $users = $userRepository->findAll();
+        } else {
+            $users = $userRepository->findBy(['rol'=>$filterRole]);
+            $rol = $rolRepository->findOneBy(['id'=>$filterRole]);
+            $this->addFlash(
+                'notice',
+                'Users filtered by ' . $rol->getName() . '!',
+            );
+        }
+
         return $this->render('user/index.html.twig', [
-            'users' => $userRepository->findAll(),
+            'users' => $users,
+            'roles' => $roles,
         ]);
     }
 

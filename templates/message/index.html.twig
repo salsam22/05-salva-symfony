@@ -10,7 +10,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-12">
+            <div class="col-6">
                 <table class="table">
                     <thead>
                     <tr>
@@ -22,20 +22,51 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {% for message in messages %}
+                    {% for send in sended %}
                         <tr>
-                            <td>{{ message.content }}</td>
-                            <td>{{ message.date ? message.date|date('Y-m-d H:i:s') }}</td>
-                            <td>{{ message.transmitter.name }}</td>
-                            <td>{{ message.receiver.name }}</td>
-                            <td class="d-flex">
-                                <a href="{{ path('message_show', {'id': message.id}) }}" class="btn btn-outline-secondary">Show</a>
-                                {{ include('message/_delete_form.html.twig') }}
+                            <td>{{ send.content }}</td>
+                            <td>{{ send.date ? send.date|date('Y-m-d H:i:s') : '' }}</td>
+                            <td>{{ send.transmitter.name }}</td>
+                            <td>{{ send.receiver.name }}</td>
+                            <td>
+                                <a href="{{ path('message_show', {'id': send.id}) }}" class="btn btn-outline-secondary ms-2 px-3 mb-1">Show</a>
+                                {{ include('message/_delete_sended_form.html.twig') }}
                             </td>
                         </tr>
                     {% else %}
                         <tr>
-                            <td colspan="4">no records found</td>
+                            <td colspan="4">No message sended!</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-6">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Content</th>
+                        <th>Date</th>
+                        <th>Transmitter</th>
+                        <th>Receiver</th>
+                        <th>actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for receive in received %}
+                        <tr>
+                            <td>{{ receive.content }}</td>
+                            <td>{{ receive.date ? receive.date|date('Y-m-d H:i:s') : '' }}</td>
+                            <td>{{ receive.transmitter.name }}</td>
+                            <td>{{ receive.receiver.name }}</td>
+                            <td>
+                                <a href="{{ path('message_show', {'id': receive.id}) }}" class="btn btn-outline-secondary ms-2 px-3 mb-1">Show</a>
+                                {{ include('message/_delete_received_form.html.twig') }}
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="4">No message received!</td>
                         </tr>
                     {% endfor %}
                     </tbody>

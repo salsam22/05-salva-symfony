@@ -61,8 +61,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var File
      * @Assert\File(
      *     maxSize = "1024k",
-     *     mimeTypes = {"image/jpg", "image/jpeg"},
-     *     mimeTypesMessage = "Please upload a valid jpg or jpeg"
+     *     mimeTypes = {"image/jpg", "image/jpeg", "image/png"},
+     *     mimeTypesMessage = "Please upload a valid jpg, jpeg or png."
      * )
      */
     private $imagesFile;

@@ -3,10 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Shirt;
+use App\Entity\User;
 use App\Form\ShirtType;
 use App\Repository\ShirtRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,6 +19,8 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ShirtController extends AbstractController
 {
+
+
     /**
      * @Route("/new", name="shirt_new", methods={"GET", "POST"})
      */
@@ -100,5 +104,18 @@ class ShirtController extends AbstractController
         );
 
         return $this->redirectToRoute('home', [], Response::HTTP_SEE_OTHER);
+    }
+
+    /**
+     * @Route("/{id}", name="shirt_index", methods={"GET"})
+     */
+    public function index(ShirtRepository $shirtRepository, Request $request, PaginatorInterface $paginator): Response {
+        if ($this->getUser() == null) {
+            return $this->redirectToRoute('login');
+        }
+        $shirts = $shirtRepository->findByIdOrdered(["id"=>$this->getUser()->getId()]);
+        return $this->render('shirt/index.html.twig', [
+            'shirts' => $shirts
+        ]);
     }
 }

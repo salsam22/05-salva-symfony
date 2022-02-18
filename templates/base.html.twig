@@ -30,20 +30,20 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="{{ path('home') }}">Home</a>
                     </li>
-                    {% if (is_granted('ROLE_ADMIN')) %}
-                        <li>
-                            <a class="nav-link" href="{{ path('user_index') }}">Users</a>
-                        </li>
-                    {% endif %}
-                    <li>
-                        <a class="nav-link" href="{{ path('shirt_new') }}">New Shirt</a>
-                    </li>
                     {% if(app.user) %}
-                        <li>
-                            <a class="nav-link" href="{{ path('message_sended', {'id': app.user.id}) }}">Message sended</a>
-                        </li>
-                        <li>
-                            <a class="nav-link" href="{{ path('message_received', {'id': app.user.id}) }}">Message received</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                My Website
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="{{ path('shirt_index', {'id':app.user.id}) }}">My shirts</a></li>
+                                <li><a class="dropdown-item" href="{{ path('shirt_new') }}">New Shirt</a></li>
+                                <li><a class="dropdown-item" href="{{ path('message_index', {'id': app.user.id}) }}">My messages</a></li>
+                                {% if (is_granted('ROLE_ADMIN')) %}
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="{{ path('user_index') }}">Users</a></li>
+                                {% endif %}
+                            </ul>
                         </li>
                     {% endif %}
                 </ul>

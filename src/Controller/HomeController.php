@@ -30,12 +30,25 @@ class HomeController extends AbstractController
                     $shirts = $shirtRepository->orderByDate();
                 } else {
                     $shirts = $shirtRepository->searchByWords($searcher);
+                    $this->addFlash(
+                        'notice',
+                        'Shirts filtered by "' . $searcher . '"!',
+                    );
                 }
             } else {
                 $shirts = $shirtRepository->findBy(["category"=>$filterCategory]);
+                $category = $categoryRepository->findOneBy(["id"=>$filterCategory]);
+                $this->addFlash(
+                    'notice',
+                    'Shirts filtered by category "' . $category->getName() . '"!',
+                );
             }
         } else {
             $shirts = $shirtRepository->filterDate($startDate, $endDate);
+            $this->addFlash(
+                'notice',
+                'Shirts filtered between "' . $startDate . ' and ' . $endDate . '"!',
+            );
         }
 
         $appointments = $paginator->paginate(
